@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jimmy · 前端開發者 - 個人品牌網站</title>
+    <title>T.A. Chen · 前端開發者 - 個人品牌網站</title>
     <meta name="description" content="T.A. Chen 的個人品牌網站，用於介紹專業背景、前端技能、精選作品集，以及提供聯絡方式。這個網站架構簡潔、專業，採用深色設計與手機優先響應式佈局。">
 
     <style>
@@ -18,6 +18,8 @@
             --color-text-secondary: #bdbdbd;
             --spacing-unit: 1.5rem;
             --max-content-width: 1200px;
+            /* 新增一個小尺寸間距變數，用於 320px 寬度 */
+            --spacing-xs: 0.75rem; 
         }
 
         /* 十一、RWD 具體要求：統一使用 .container / body 邊距 */
@@ -37,6 +39,8 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             line-height: 1.6; /* 舒適行距 */
             font-size: 16px;
+            /* 確保不會有水平捲動的額外保護 */
+            overflow-x: hidden;
         }
 
         .page {
@@ -53,7 +57,8 @@
         .container {
             width: 100%;
             max-width: var(--max-content-width);
-            padding: 0 var(--spacing-unit);
+            /* 修正：確保 container 的 padding 不會過度擠壓 320px 的內容 */
+            padding: 0 var(--spacing-xs); 
             margin-left: auto;
             margin-right: auto;
         }
@@ -75,6 +80,8 @@
             margin-top: 0;
             margin-bottom: calc(var(--spacing-unit) * 2);
             text-align: center;
+            /* 確保標題不會在 320px 換行且超出 */
+            word-break: break-word; 
         }
 
         /* 連結樣式 */
@@ -114,12 +121,15 @@
 
         /* 三、專案基本資訊：網站名稱（Logo） */
         .site-logo {
-            font-size: 1.2rem;
+            /* 修正：在 320px 下縮小 Logo 文字，防止超出寬度 */
+            font-size: 1.1rem; 
             font-weight: 700;
             color: var(--color-primary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             padding: 0.25rem 0;
+            /* 確保 Logo 文字不會造成水平捲動 */
+            min-width: 0; 
         }
 
         /* 導覽連結項目 */
@@ -134,8 +144,9 @@
             display: flex;
         }
         
+        /* 修正：使用 gap 替代 margin-right，或在 RWD 區處理 */
         .nav-item:not(:last-child) {
-            margin-right: var(--spacing-unit);
+            margin-right: 0.75rem; 
         }
 
         .nav-link {
@@ -175,6 +186,12 @@
             font-size: 0.9rem;
             color: var(--color-text-secondary);
         }
+        
+        .site-footer p {
+            margin: 0.25rem 0;
+            /* 確保頁尾文字在小螢幕下能夠換行 */
+            word-break: break-word;
+        }
 
         /* CSS:BASE-END */
 
@@ -185,9 +202,10 @@
         }
 
         .hero-heading {
-            font-size: 2.8rem;
+            font-size: 2.5rem; /* 修正：在 320px 寬度下使用稍小的字體 */
             margin-bottom: var(--spacing-unit);
             line-height: 1.2;
+            word-break: break-word; /* 確保長標題能換行 */
         }
 
         .hero-tagline {
@@ -223,13 +241,13 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.5rem; /* 修正：在 320px 寬度下使用較小的間距 */
             margin-top: calc(var(--spacing-unit) * 2);
         }
 
         .skill-item-placeholder {
             background-color: var(--color-surface);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem; /* 修正：在 320px 寬度下使用較小的 padding */
             border-radius: 4px;
             color: var(--color-primary);
             font-weight: 500;
@@ -290,6 +308,22 @@
 
         @media (min-width: 768px) {
             /* 平板及以上 */
+            :root {
+                --spacing-unit: 1.5rem; /* 恢復或調整為平板間距 */
+            }
+
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
+            
+            .site-logo {
+                font-size: 1.2rem; /* 恢復正常 Logo 大小 */
+            }
+
+            .nav-item:not(:last-child) {
+                margin-right: 1.5rem; /* 恢復正常間距 */
+            }
+
             .site-header .nav {
                 justify-content: space-around;
             }
@@ -336,6 +370,10 @@
             :root {
                 --spacing-unit: 2rem;
             }
+            
+            .container {
+                padding: 0 var(--spacing-unit);
+            }
 
             .projects-grid-placeholder {
                 grid-template-columns: repeat(3, 1fr);
@@ -368,11 +406,11 @@
                     <img src="https://source.unsplash.com/800x600/?developer,laptop" alt="在現代深色辦公桌前，專注於筆電螢幕的前端開發者" loading="lazy" class="hero-img">
                     
                     <h1 class="hero-heading">
-                        Hi，我是 Jimmy
+                        Hi，我是 T.A. Chen
                     </h1>
                     
                     <p class="hero-tagline">
-                        歡迎來到我的個人品牌網站。我是一位充滿熱情、注重使用者體驗的前端開發者。
+                        歡迎來到我的個人品牌網站。我是一位充滿熱情、注重使用者體驗的 **Frontend Developer**。
                     </p>
 
                     <p>
@@ -441,4 +479,47 @@
                         <div class="project-card-placeholder">
                             <img src="https://source.unsplash.com/400x250/?ecommerce,ui" alt="專案三：電子商務結帳頁面" loading="lazy">
                             <h3>專案三：電商 UI/UX 優化</h3>
-                            <p>專注於結帳流程的優
+                            <p>專注於結帳流程的優化，提升轉換率，並確保跨瀏覽器相容性。</p>
+                            <a href="https://example.com/project-3" class="placeholder-btn" style="padding: 0.5rem 1rem;">查看專案</a>
+                        </div>
+                    </div>
+                    
+                    <blockquote style="margin-top: calc(var(--spacing-unit) * 2); padding: 1rem; border-left: 5px solid var(--color-primary); background-color: var(--color-background);">
+                        之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 **&lt;section&gt;** 程式碼整段貼在這兩個註解中間，完全取代現在這一區。
+                    </blockquote>
+                </div>
+            </section>
+            <section id="contact" class="section section-contact" aria-labelledby="contact-heading">
+                <div class="container">
+                    <h2 id="contact-heading" class="section-title">聯絡我（之後會用 Section SDD 替換）</h2>
+                    <p>這裡目前是 Contact 區的占位內容。如果您有任何專案合作或職缺機會，歡迎隨時與我聯繫！</p>
+                    <p>未來會提供明確的聯絡資訊，例如 E-mail、電話（可選）、以及社群媒體連結。</p>
+
+                    <ul class="contact-list-placeholder">
+                        <li>
+                            <a href="mailto:hello@example.com" title="寄送電子郵件">電子郵件 (占位)</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/yourname" title="前往我的 GitHub">GitHub (占位)</a>
+                        </li>
+                        <li>
+                            <a href="tel:+886900000000" title="撥打電話">+886-900-000-000 (占位)</a>
+                        </li>
+                    </ul>
+
+                    <blockquote style="margin-top: calc(var(--spacing-unit) * 2); padding: 1rem; border-left: 5px solid var(--color-primary); background-color: var(--color-surface);">
+                        之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 **&lt;section&gt;** 程式碼整段貼在這兩個註解中間，完全取代現在這一區。
+                    </blockquote>
+                </div>
+            </section>
+            </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>&copy; 2025 T.A. Chen · Frontend Dev. All rights reserved.</p>
+                <p>網站骨架由 AI 產生，CSS 禁用 ID 選擇器。</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
